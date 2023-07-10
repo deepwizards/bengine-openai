@@ -80,8 +80,34 @@ Errors from the GPT model or the Express server are caught and returned as a JSO
 ## Deployment
 
 This section will guide you on how to deploy this on a live system.
+This application is containerized using Docker. Follow the steps below to build and run the Docker image.
 
-To prepare your application for deployment, use the Dockerfile to add to your cluster.
+### Prerequisites
+
+- Docker installed on your system
+
+### Building the Docker Image
+
+1. Make sure you are in the root directory of the project.
+
+2. Build the Docker image using the Dockerfile provided in the root directory of the project.
+
+```bash
+docker build -t gpt-service .
+```
+
+This command builds a Docker image using the Dockerfile in the current directory and tags it with the name you provide. The building process starts from a Node.js 16 image, sets the working directory to /app, copies the package.json and package-lock.json files to the working directory, installs the required npm packages, copies the rest of the files, exposes port 3001, and finally, defines the command to start the application.
+
+### Running the Docker Image
+After successfully building the Docker image, run it using the following command.
+
+```
+docker run -d -p 3001:3001 --name gpt-service-1 gpt-service
+```
+This command runs the Docker image in a container, maps port 3001 in the container to port 3001 on the host machine, runs the container in detached mode, and gives the running container a name.
+
+Now, you can access the application at http://localhost:3001.
+
 
 
 
