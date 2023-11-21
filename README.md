@@ -1,113 +1,71 @@
-# GPT Service API
+# bengine-openai
 
-The GPT Service API is a Node.js-based application that provides interaction with OpenAI's powerful GPT model. This API is built on top of Express.js framework and leverages the OpenAI API client to communicate with the GPT model. It provides two main endpoints: a POST `/gpt` endpoint for processing and retrieving responses based on provided prompts, and a GET `/status` endpoint for checking the status of the service.
+Welcome to `bengine-openai`, a module designed for seamless integration of OpenAI's GPT API with the bengine platform. This repository offers a robust and efficient way to incorporate advanced AI capabilities into your bengine services.
 
-## Table of Contents
+## Key Features
 
-- [Overview](#overview)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [API Reference](#api-reference)
-- [Error Handling](#error-handling)
-- [Deployment](#deployment)
-
-## Overview
-
-The main components of this API are:
-
-1. **Express Server**: This is the main server that listens to incoming requests.
-2. **Service Function**: A service function is defined that interacts with the GPT model. This function, `functionToCall()`, handles the communication with the GPT model and includes error handling and retries.
-3. **OpenAI API Client**: This is the client that communicates directly with the OpenAI's GPT model. It sends the prompts and retrieves the generated responses.
+- **OpenAI GPT API Integration**: Easy integration with OpenAI's GPT API.
+- **Cost Calculations**: Automated calculations for tracking API usage and costs.
+- **Error Handling with Automatic Retries**: Enhanced reliability with built-in error handling and retry mechanisms.
+- **Containerization**: Ready for deployment in a bengine service cluster.
+- **Testing Dashboard**: A simple, user-friendly interface to test the API functionalities.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+### Cloning the Repository
 
-### Prerequisites
+To clone the repository, run:
 
-- Node.js
-- An API key from OpenAI
+`git clone https://github.com/deepwizards/bengine-openai.git`
 
-### Installation
+### Setup
 
-1. Clone the repo
-```
-git clone https://github.com/deepwizards/gpt-service.git
-```
+The module is containerized for easy integration. Follow these steps:
 
-2. Install NPM packages
+1. **Build the Container**:
+   `docker build -t bengine-openai .`
 
-```npm install```
+2. **Run the Container**:
+   `docker run -d --name bengine-openai bengine-openai`
 
-3. Ensure your environment (.env, bash_profile, docker-compose env etc...) has your OpenAI API key set
-```
-OPENAI_API_KEY=your_api_key
-```
+### Using the Testing Dashboard
 
-## Usage
+Access the testing dashboard to interact with the OpenAI GPT API:
 
-To start the server, use the following command:
-```
-npm start
-```
+1. Navigate to the dashboard URL.
+2. Enter your queries and observe the responses.
 
-After starting the server, you can send a POST request to `http://localhost:3001/gpt` with a JSON body containing the "prompt" key to get a response from the GPT model.
+## Contribution Guidelines
 
-For example:
-```
-{
-    "prompt": "Translate the following English text to French: 'Hello, how are you?'"
-}
-```
+We follow a structured contribution process:
 
-The response will be the output from the GPT model based on your prompt.
+1. **Feature Branch**:
+   `git checkout -b feature/your-feature-name`
 
-## API Reference
+2. **Commit Changes**:
+   `git commit -am "Add your feature"`
 
-`POST /gpt`
+3. **Push to Branch**:
+   `git push origin feature/your-feature-name`
 
-- Parameters: `prompt` in the body (required)
-- Response: JSON object containing the status ('completed' for successful requests) and result from the GPT model.
+4. **Pull Request**:
+   Open a PR to the `dev` branch for review.
 
-`GET /status`
+5. **Review and Approval**:
+   Wait for a maintainer's review and approval.
 
-- Response: JSON object indicating the status of the API ('OK' means the API is running properly).
+6. **Merge to Main**:
+   Approved changes will be merged into the `main` branch.
 
-## Error Handling
+## Best Practices for Contribution
 
-Errors from the GPT model or the Express server are caught and returned as a JSON object with the status set as 'error' and a relevant error message. If the GPT model returns a rate limit error (429), the service function will attempt to retry the request up to 5 times with a 1-second delay between each attempt.
+- Adhere to coding standards and guidelines.
+- Ensure proper functionality of the integration in the containerized environment.
+- Thoroughly test all new features or changes.
+- Update documentation to reflect your contributions.
 
-## Deployment
+## Support and Contact
 
-This section will guide you on how to deploy this on a live system.
-This application is containerized using Docker. Follow the steps below to build and run the Docker image.
+For support or queries, please contact [ben@bengine.ai](mailto:ben@bengine.ai).
 
-### Prerequisites
-
-- Docker installed on your system
-
-### Building the Docker Image
-
-1. Make sure you are in the root directory of the project.
-
-2. Build the Docker image using the Dockerfile provided in the root directory of the project.
-
-```bash
-docker build -t gpt-service .
-```
-
-This command builds a Docker image using the Dockerfile in the current directory and tags it with the name you provide. The building process starts from a Node.js 16 image, sets the working directory to /app, copies the package.json and package-lock.json files to the working directory, installs the required npm packages, copies the rest of the files, exposes port 3001, and finally, defines the command to start the application.
-
-### Running the Docker Image
-After successfully building the Docker image, run it using the following command.
-
-```
-docker run -d -p 3001:3001 --name gpt-service-1 gpt-service
-```
-This command runs the Docker image in a container, maps port 3001 in the container to port 3001 on the host machine, runs the container in detached mode, and gives the running container a name.
-
-Now, you can access the application at http://localhost:3001.
-
-
-
-
+Thank you for contributing to `bengine-openai-integration`!
